@@ -6,7 +6,7 @@ const config: ModuleFederationConfig = {
   exposes: {
     './Routes': 'apps/account/src/app/remote-entry/entry.routes.ts',
   },
-  ...sharedConfig
+  ...sharedConfig,
 };
 
 export default config;

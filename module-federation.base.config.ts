@@ -42,8 +42,18 @@ export const sharedConfig: Pick<
       };
     }
 
+    if (libraryName.startsWith('@wion-fnb/shared')) {
+      return {
+        ...defaultConfig,
+        singleton: true,
+        eager: true,
+        requiredVersion: false,
+        strictVersion: false,
+      };
+    }
+
     return false;
-  }
+  },
 };
 
 export default sharedConfig;
