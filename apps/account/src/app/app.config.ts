@@ -1,10 +1,11 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { ApplicationConfig } from '@angular/core';
+import { importProvidersFrom } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { appRoutes } from './app.routes';
-
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(appRoutes),
+    importProvidersFrom(
+      RouterModule.forRoot(appRoutes, { initialNavigation: 'enabledBlocking' })
+    ),
   ],
 };

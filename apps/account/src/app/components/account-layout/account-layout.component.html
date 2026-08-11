@@ -1,0 +1,59 @@
+<div
+  #accountLayout
+  class="min-w-screen min-h-screen w-full h-full flex items-stretch tds-body-2 tds-color-surface-lowest-light dark:tds-color-surface-lowest-dark account-layout"
+>
+  <div
+    class="flex items-center justify-center w-[75%] max-w-[calc(100%-320px)] min-h-[700px]"
+  >
+    <div
+      class="max-w-[584px] min-w-[420px] w-full flex items-center justify-center"
+    >
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  <div
+    class="flex flex-col w-[25%] min-w-[320px] min-h-[700px] bg-gradient-layout"
+  >
+    <div class="flex items-end justify-center w-full h-[70%] relative">
+      <img
+        [src]="loginLogoUrl"
+        class="max-w-[60%] min-w-[220px] max-h-full z-[5]"
+      />
+      <div class="absolute inset-0 flex items-end w-full h-full">
+        <img [src]="backgroundLogoUrl" class="w-full h-[80%]" />
+      </div>
+    </div>
+    <div
+      class="w-full h-[30%] flex flex-col items-center justify-between pt-4 pb-5 px-8"
+    >
+      <div class="w-full max-w-[380px]">
+        <div
+          class="w-full text-center tds-color-text-primary tds-heading-5 font-semibold"
+        >
+          Phần mềm quản lý bán hàng
+        </div>
+        <div
+          class="w-full text-center tds-body-2 tds-color-text-tertiary mt-2.5"
+        >
+          Nền tảng khởi nghiệp thông minh đáp ứng đầy đủ nghiệp vụ bán lẻ, tiết
+          kiệm 70% thời gian và chi phí.
+        </div>
+        <div class="w-full text-center mt-4">
+          <a
+            *ngIf="website && website != ''"
+            [href]="'https://' + website"
+            class="w-fit tds-body-2 font-semibold tds-color-text-interactive hover:tds-color-text-interactive-hover hover:underline cursor-pointer"
+          >
+            {{ website }}
+          </a>
+        </div>
+      </div>
+      <div
+        class="tds-body-2 flex items-center justify-center w-full h-[36px] pt-4"
+      >
+        <span class="tds-color-text-tertiary pr-1">Tổng đài hỗ trợ:</span>
+        <span class="tds-color-text-info font-semibold">0898 001 888</span>
+      </div>
+    </div>
+  </div>
+</div>

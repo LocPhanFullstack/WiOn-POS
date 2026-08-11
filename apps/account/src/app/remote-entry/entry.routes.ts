@@ -1,31 +1,35 @@
 import { Route } from '@angular/router';
-import { AccountLayoutComponent } from '../layout/layout.component';
 import { provideFNBAccountApiModule } from '@wion-fnb/account/data-access';
-import { LoginComponent } from '@wion-fnb/account/feature';
 import { WIMfConfigService } from '@wi-mfes/config';
+import { RemoteEntryComponent } from './entry.component';
+import { AccountLayoutComponent } from '../components';
+import { LoginComponent } from '../components/login/login.component';
 
 export const remoteRoutes: Route[] = [
   {
     path: '',
-    component: AccountLayoutComponent,
-    providers: [
-      provideFNBAccountApiModule({
-        useFactory: (cs: WIMfConfigService) => ({
-          rootUrl: `${cs.getRemoteConfig('account')?.gatewayUrl}/authentication`
-        }),
-        deps: [WIMfConfigService]
-      }),
-    ],
+    component: RemoteEntryComponent,
     children: [
       {
-        path: 'login',
-        component: LoginComponent
-      },
-      {
         path: '',
-        pathMatch: 'full',
-        redirectTo: 'login',
+        component: AccountLayoutComponent,
+        providers: [
+          provideFNBAccountApiModule({
+            useFactory: (cs: WIMfConfigService) => ({
+              rootUrl: `${
+                cs.getRemoteConfig('account')?.gatewayUrl
+              }/authentication`,
+            }),
+            deps: [WIMfConfigService],
+          }),
+        ],
+        children: [
+          {
+            path: 'login',
+            component: LoginComponent,
+          },
+        ],
       },
-    ]
+    ],
   },
 ];

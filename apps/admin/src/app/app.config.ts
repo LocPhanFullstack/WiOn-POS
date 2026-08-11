@@ -11,7 +11,10 @@ import {
 import { appRoutes } from './app.routes';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { WAuthGuardService, WAuthInterceptorService } from '@wion-fnb/shared';
+import {
+  WAuthGuardService,
+  WAuthInterceptorService,
+} from '@wion-fnb/shared/services';
 import {
   HTTP_INTERCEPTORS,
   provideHttpClient,

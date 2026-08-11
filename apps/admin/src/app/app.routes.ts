@@ -1,6 +1,6 @@
 import { Route } from '@angular/router';
 import { loadRemoteModule } from '@nx/angular/mf';
-import { WAuthGuardService } from '@wion-fnb/shared';
+import { WAuthGuardService } from '@wion-fnb/shared/services';
 import { LayoutComponent } from './layout/layout.component';
 
 export const appRoutes: Route[] = [

@@ -1,0 +1,197 @@
+<div
+  class="flex flex-col h-full w-full px-8 login-layout tds-color-text-primary"
+>
+  <tds-spin
+    [spinning]="isLoading"
+    [indicator]="loadingSpin"
+    size="md"
+    class="w-full h-full flex overflow-auto no-scrollbar"
+  >
+    <div
+      *ngIf="_form"
+      class="w-full h-full flex flex-col flex-auto items-center justify-center"
+    >
+      <div class="w-full text-left">
+        <img
+          src="https://static-tds-public-projects.tmtco.org/branding-assets/logos/wi/wion-pos/ver/light.svg"
+          height="62"
+          width="115"
+          class="object-cover dark:hidden inline-block"
+        />
+        <img
+          src="https://static-tds-public-projects.tmtco.org/branding-assets/logos/wi/wion-pos/ver/dark.svg"
+          height="62"
+          width="115"
+          class="object-cover hidden dark:inline-block"
+        />
+      </div>
+      <div
+        class="w-full text-title-1 tds-color-text-tertiary text-left mt-2 px-2"
+      >
+        Chào mừng bạn đến với
+        <span class="tds-color-text-brand-primary">WiOn POS</span>
+      </div>
+      <div class="w-full tds-heading-3 font-semibold text-left my-5 px-2">
+        Đăng nhập
+      </div>
+      <form [formGroup]="_form" (submit)="login()" class="w-full px-2">
+        <div class="flex justify-between">
+          <tds-label>Số điện thoại</tds-label>
+        </div>
+
+        <tds-form-field
+          [color]="
+            !_form.controls['PhoneNumber'].valid &&
+            _form.controls['PhoneNumber'].touched
+              ? 'error'
+              : 'default'
+          "
+          class="tds-body-2 mt-2"
+        >
+          <input
+            tdsInput
+            wpPhoneNumber
+            type="text"
+            size="xl"
+            autocomplete="off"
+            maxlength="10"
+            formControlName="PhoneNumber"
+            placeholder="Nhập số điện thoại"
+            (input)="onInputPhoneNumber($event)"
+          />
+          <span tdsPrefix class="tds-body-2 font-semibold flex self-center"
+            >+84</span
+          >
+        </tds-form-field>
+        <tds-error
+          *ngIf="
+            hasError('PhoneNumber', 'required') &&
+            _form.controls['PhoneNumber'].touched
+          "
+          >Vui lòng nhập số điện thoại</tds-error
+        >
+        <tds-error
+          *ngIf="
+            hasError('PhoneNumber', 'invalid') &&
+            _form.controls['PhoneNumber'].touched
+          "
+          >Số điện thoại không hợp lệ</tds-error
+        >
+
+        <div class="flex justify-between mt-4">
+          <tds-label>Mật khẩu</tds-label>
+          <div
+            class="tds-color-text-secondary tds-body-2 font-regular cursor-pointer hover:opacity-80"
+            (click)="openForgotPassword($event)"
+          >
+            Quên mật khẩu?
+          </div>
+        </div>
+
+        <tds-form-field
+          [color]="
+            !_form.controls['Password'].valid &&
+            _form.controls['Password'].touched
+              ? 'error'
+              : 'default'
+          "
+          class="mt-2"
+        >
+          <input
+            tdsInput
+            wpPassword
+            (input)="onInputPassword()"
+            type="password"
+            size="xl"
+            autocomplete="off"
+            formControlName="Password"
+            [type]="isShowPassword ? 'text' : 'password'"
+            placeholder="Nhập mật khẩu"
+          />
+          <span tdsSuffix (click)="showPassword()">
+            <i
+              [ngClass]="isShowPassword ? 'tdsi-eye-fill' : 'tdsi-eye-off-fill'"
+            ></i>
+          </span>
+        </tds-form-field>
+        <tds-error
+          *ngIf="
+            hasError('Password', 'required') &&
+            _form.controls['Password'].touched
+          "
+          >Vui lòng nhập mật khẩu</tds-error
+        >
+
+        <div
+          *ngIf="!!alertMessage"
+          class="tds-color-background-error-minimal rounded-lg flex items-center w-full p-3 mt-5"
+        >
+          <i
+            class="tdsi-error-fill tds-icon-size-l tds-color-icon-error mr-3"
+          ></i>
+          <span class="break-words">{{ alertMessage }}</span>
+        </div>
+
+        <button class="mt-5 w-full" type="submit" size="xl" tds-button>
+          Đăng nhập
+        </button>
+        <div class="w-full h-5 flex items-center justify-center mt-4">
+          <div class="w-[70%] h-0 border-t tds-color-border-secondary relative">
+            <div
+              class="w-full h-full flex items-center justify-center inset-0 absolute"
+            >
+              <div
+                class="tds-color-surface-low tds-color-text-tertiary tds-body-2 px-2"
+              >
+                Hoặc
+              </div>
+            </div>
+          </div>
+        </div>
+        <button
+          class="w-full mt-4"
+          type="button"
+          size="xl"
+          tds-button-outline
+          [tdsThrottleTime]="500"
+          (tdsBtnClick)="openWiAccountLoginLink()"
+        >
+          Đăng nhập bằng WiAccount
+        </button>
+        <div class="tds-color-text-tertiary tds-body-2 text-center mt-4">
+          Bạn chưa có tài khoản?
+          <a
+            (click)="directSignUpPage()"
+            class="font-semibold tds-color-text-info hover:tds-color-text-interactive-hover cursor-pointer hover:underline"
+            >Đăng ký</a
+          >
+        </div>
+      </form>
+    </div>
+
+    <div class="w-full flex gap-x-2 tds-body-2 tds-color-text-primary py-8">
+      <div class="w-full flex flex-col justify-center items-center">
+        <tds-form-field class="w-full" *ngIf="isDevMode">
+          <tds-label>API GATEWAY </tds-label>
+          <input
+            tdsInput
+            autocomplete="off"
+            [(ngModel)]="gateway"
+            placeholder="API GATEWAY"
+            (keyup.enter)="changeGateway()"
+          />
+        </tds-form-field>
+      </div>
+    </div>
+  </tds-spin>
+  <ng-template #loadingSpin>
+    <div
+      class="w-full h-full fixed inset-0 flex items-center justify-center bg-white/70 dark:bg-black/40 z-10"
+    >
+      <img
+        src="https://static-tds-public-projects.tmtco.org/branding-assets/animation/loading/wion-logo-loading-450x450.gif"
+        style="width: 150px; height: 150px"
+      />
+    </div>
+  </ng-template>
+</div>

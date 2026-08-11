@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
   selector: 'lib-dashboard-layout',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './layout.component.html',
+  templateUrl: './dashboard-layout.component.html',
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
