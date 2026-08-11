@@ -1,0 +1,24 @@
+import { Route } from '@angular/router';
+import { loadRemoteModule } from '@nx/angular/mf';
+import { WAuthGuardService } from '@wion-fnb/shared';
+import { LayoutComponent } from './layout/layout.component';
+
+export const appRoutes: Route[] = [
+  {
+    path: 'account',
+    loadChildren: () =>
+      loadRemoteModule('account', './Routes').then((m) => m.remoteRoutes),
+  },
+  {
+    path: '',
+    component: LayoutComponent,
+    canActivate: [WAuthGuardService],
+    children: [
+      {
+        path: 'dashboard',
+        loadChildren: () =>
+          loadRemoteModule('dashboard', './Routes').then((m) => m.remoteRoutes),
+      },
+    ],
+  },
+];

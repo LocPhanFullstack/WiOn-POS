@@ -1,0 +1,18 @@
+{
+  "default": {
+    "gatewayUrl": "https://gateway.dev-v1.wionfnb.public.rke.app.dev.tmtco.org",
+    "locale": "vi",
+    "environment": "DEV",
+    "assetsBaseUrl": ""
+  },
+  "remotes": {
+    "account": {
+      "url": "http://localhost:4201",
+      "config": {}
+    },
+    "dashboard": {
+      "url": "http://localhost:4202",
+      "config": {}
+    }
+  }
+}

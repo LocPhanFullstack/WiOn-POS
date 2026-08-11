@@ -1,0 +1,18 @@
+{
+  "default": {
+    "gatewayUrl": "",
+    "locale": "vi",
+    "environment": "PRODUCTION",
+    "assetsBaseUrl": ""
+  },
+  "remotes": {
+    "account": {
+      "url": "apps/account",
+      "config": {}
+    },
+    "dashboard": {
+      "url": "apps/dashboard",
+      "config": {}
+    }
+  }
+}

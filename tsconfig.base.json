@@ -1,0 +1,33 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2020", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@wion-fnb/account/data-access": [
+        "libs/account/data-access/src/index.ts"
+      ],
+      "@wion-fnb/account/feature": ["libs/account/feature/src/index.ts"],
+      "@wion-fnb/account/ui": ["libs/account/ui/src/index.ts"],
+      "@wion-fnb/dashboard/feature": ["libs/dashboard/feature/src/index.ts"],
+      "@wion-fnb/file/data-access": ["libs/file/data-access/src/index.ts"],
+      "@wion-fnb/shared": ["libs/shared/src/index.ts"],
+      "account/Routes": ["apps/account/src/app/remote-entry/entry.routes.ts"],
+      "dashboard/Routes": [
+        "apps/dashboard/src/app/remote-entry/entry.routes.ts"
+      ]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}
