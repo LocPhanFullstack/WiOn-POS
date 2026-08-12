@@ -42,7 +42,7 @@ export const sharedConfig: Pick<
       };
     }
 
-    if (libraryName.startsWith('@wion-fnb/shared')) {
+    if (libraryName.startsWith('@wion-fnb/')) {
       return {
         ...defaultConfig,
         singleton: true,

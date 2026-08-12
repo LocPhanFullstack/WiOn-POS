@@ -2,8 +2,7 @@ import { Route } from '@angular/router';
 import { provideFNBAccountApiModule } from '@wion-fnb/account/data-access';
 import { WIMfConfigService } from '@wi-mfes/config';
 import { RemoteEntryComponent } from './entry.component';
-import { AccountLayoutComponent } from '../components';
-import { LoginComponent } from '../components/login/login.component';
+import { AccountLayoutComponent, LoginComponent } from '../components';
 
 export const remoteRoutes: Route[] = [
   {

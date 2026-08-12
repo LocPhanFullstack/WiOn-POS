@@ -4,9 +4,9 @@
   "license": "MIT",
   "scripts": {
     "generate": "node generate-apis.js",
-    "start": "npx nx run admin:serve:development",
-    "start:account": "npx nx run account:serve:development",
-    "start:dashboard": "npx nx run dashboard:serve:development"
+    "start": "npx nx serve admin --configuration=development --devRemotes=account",
+    "start:account": "npx nx serve account --configuration=development",
+    "start:dashboard": "npx nx serve dashboard --configuration=development"
   },
   "private": true,
   "dependencies": {

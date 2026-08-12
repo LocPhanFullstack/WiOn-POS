@@ -1,59 +1,58 @@
-<div
-  #accountLayout
-  class="min-w-screen min-h-screen w-full h-full flex items-stretch tds-body-2 tds-color-surface-lowest-light dark:tds-color-surface-lowest-dark account-layout"
+<main
+  class="account-login tds-theme-color-green grid min-h-[100dvh] grid-cols-[minmax(0,1fr)_520px] bg-white max-lg:grid-cols-1"
 >
-  <div
-    class="flex items-center justify-center w-[75%] max-w-[calc(100%-320px)] min-h-[700px]"
+  <section class="flex min-w-0 flex-col p-12 max-sm:p-6">
+    <img
+      class="block shrink-0"
+      src="assets/auth/wion-fnb-logo.svg"
+      width="115"
+      height="62"
+      alt="WiOn F&B"
+    />
+
+    <router-outlet></router-outlet>
+  </section>
+
+  <aside
+    class="relative hidden items-center justify-center px-[60px] pt-10 pb-[76px] text-center lg:flex"
+    style="
+      background: linear-gradient(
+        180deg,
+        rgba(157, 245, 178, 0.3) 7%,
+        #fff 100%
+      );
+    "
   >
-    <div
-      class="max-w-[584px] min-w-[420px] w-full flex items-center justify-center"
-    >
-      <router-outlet></router-outlet>
-    </div>
-  </div>
-  <div
-    class="flex flex-col w-[25%] min-w-[320px] min-h-[700px] bg-gradient-layout"
-  >
-    <div class="flex items-end justify-center w-full h-[70%] relative">
+    <div class="grid w-full justify-items-center gap-10">
       <img
-        [src]="loginLogoUrl"
-        class="max-w-[60%] min-w-[220px] max-h-full z-[5]"
+        class="block h-auto w-full max-w-[359px]"
+        src="assets/auth/restaurant-management.svg"
+        width="359"
+        height="382"
+        alt="Minh họa quản lý nhà hàng"
       />
-      <div class="absolute inset-0 flex items-end w-full h-full">
-        <img [src]="backgroundLogoUrl" class="w-full h-[80%]" />
-      </div>
-    </div>
-    <div
-      class="w-full h-[30%] flex flex-col items-center justify-between pt-4 pb-5 px-8"
-    >
-      <div class="w-full max-w-[380px]">
-        <div
-          class="w-full text-center tds-color-text-primary tds-heading-5 font-semibold"
+      <div class="grid gap-3">
+        <h2
+          class="m-0 font-['TMT_Sans',sans-serif] text-2xl leading-8 font-semibold tds-color-text-primary"
         >
-          Phần mềm quản lý bán hàng
-        </div>
-        <div
-          class="w-full text-center tds-body-2 tds-color-text-tertiary mt-2.5"
-        >
-          Nền tảng khởi nghiệp thông minh đáp ứng đầy đủ nghiệp vụ bán lẻ, tiết
+          Quản lý nhà hàng nhanh chóng và hiệu quả
+        </h2>
+        <p class="m-0 tds-body-2 tds-color-text-tertiary">
+          Đơn giản hóa vận hành từ gọi món, in bếp đến báo cáo kinh doanh, tiết
           kiệm 70% thời gian và chi phí.
-        </div>
-        <div class="w-full text-center mt-4">
-          <a
-            *ngIf="website && website != ''"
-            [href]="'https://' + website"
-            class="w-fit tds-body-2 font-semibold tds-color-text-interactive hover:tds-color-text-interactive-hover hover:underline cursor-pointer"
-          >
-            {{ website }}
-          </a>
-        </div>
-      </div>
-      <div
-        class="tds-body-2 flex items-center justify-center w-full h-[36px] pt-4"
-      >
-        <span class="tds-color-text-tertiary pr-1">Tổng đài hỗ trợ:</span>
-        <span class="tds-color-text-info font-semibold">0898 001 888</span>
+        </p>
       </div>
     </div>
-  </div>
-</div>
+
+    <p
+      class="absolute bottom-5 left-0 m-0 w-full text-center tds-body-2 tds-color-text-tertiary"
+    >
+      Tổng đài hỗ trợ:
+      <a
+        class="tds-color-text-interactive font-semibold no-underline"
+        href="tel:0898001888"
+        >0898 001 888</a
+      >
+    </p>
+  </aside>
+</main>
