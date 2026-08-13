@@ -25,7 +25,7 @@ import { TDSFormFieldModule } from 'tds-ui/form-field';
 import { TDSInputModule } from 'tds-ui/tds-input';
 import { TDSButtonModule } from 'tds-ui/button';
 import { TDSSpinnerModule } from 'tds-ui/progress-spinner';
-import { TDSHelperString, TDSSafeAny } from 'tds-ui/shared/utility';
+import { TDSHelperString } from 'tds-ui/shared/utility';
 import { TDSInputNumberModule } from 'tds-ui/input-number';
 import { TDSModalModule, TDSModalService } from 'tds-ui/modal';
 import { TDSMapperPipeModule } from 'tds-ui/cdk/pipes/mapper';
@@ -50,7 +50,7 @@ import {
   WPPhoneNumberDirective,
 } from '@wion-fnb/shared/directives';
 import { DateHelperService } from 'tds-ui/i18n';
-// import { ModalForgotPasswordComponent } from '@wion-pos/account/ui';
+import { ModalForgotPasswordComponent } from '@wion-fnb/account/feature';
 import { WIMfConfigService } from '@wi-mfes/config';
 
 const directives = [WPPasswordDirective, WPPhoneNumberDirective];
@@ -92,7 +92,6 @@ export class LoginComponent implements OnInit {
   isShowPassword = false;
 
   visibleAlert = false;
-  alertMessage = '';
 
   failedCount = 0;
   overviewUrl = '/dashboard/overview';
@@ -140,10 +139,6 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  onInputPassword() {
-    this.alertMessage = '';
-  }
-
   showPassword() {
     this.isShowPassword = !this.isShowPassword;
   }
@@ -181,16 +176,9 @@ export class LoginComponent implements OnInit {
     this._form.controls[errorName].clearValidators();
   }
 
-  onInputPhoneNumber(event: TDSSafeAny) {
-    this.alertMessage = '';
-  }
-
   validateLoginError(error: HttpErrorResponse | null) {
     if (!error || error.status == 0 || error.status >= 500) {
-      this.notification.error(
-        'Đã có lỗi xảy ra',
-        '<span class="w-[320px]">Hệ thống đang gặp sự cố kỹ thuật. Bạn vui lòng thử lại sau.</span>'
-      );
+      this.showModalNoResponse();
     } else {
       const code = parseErrorCode(error);
       const errorData = parseErrorBody(error)?.error;
@@ -205,7 +193,7 @@ export class LoginComponent implements OnInit {
           case 'Authentication.Account:0003':
           case 'Authentication.SignIn:0009':
           case 'Authentication.SignUp:0011':
-            this.alertMessage = `Tài khoản không đúng hoặc chưa được đăng ký. Vui lòng thử lại.`;
+            this.showModalLoginError();
             break;
           default:
             this.notification.error(
@@ -240,6 +228,26 @@ export class LoginComponent implements OnInit {
         )}</span>`,
       okText: null,
       cancelText: 'Đóng',
+    });
+  }
+
+  showModalLoginError() {
+    this.modalService.error({
+      title: 'Đăng nhập không thành công',
+      content: `Tài khoản không đúng hoặc chưa được đăng kí. Vui lòng liên hệ
+      <span class="font-semibold text-[#006EEF]">0898 001 888</span> để được trải nghiệm dịch vụ.`,
+      okText: null,
+      cancelText: 'Đóng',
+    });
+  }
+
+  showModalNoResponse() {
+    this.modalService.error({
+      title: 'Hệ thống không phản hồi',
+      content:
+        'Có một lỗi nội bộ xảy ra trong quá trình thực hiện yêu cầu của bạn.',
+      okText: null,
+      cancelText: 'Đóng',
     });
   }
 
@@ -283,32 +291,32 @@ export class LoginComponent implements OnInit {
   }
 
   openForgotPassword(event?: MouseEvent) {
-    // event?.preventDefault();
-    // event?.stopImmediatePropagation();
+    event?.preventDefault();
+    event?.stopImmediatePropagation();
 
-    // const modal = this.modalService.create({
-    //   content: ModalForgotPasswordComponent,
-    //   bodyStyle: {
-    //     padding: '24px',
-    //   },
-    //   closable: false,
-    //   footer: null,
-    //   viewContainerRef: this.viewContainerRef,
-    // });
+    const modal = this.modalService.create({
+      content: ModalForgotPasswordComponent,
+      bodyStyle: {
+        padding: '24px',
+      },
+      closable: false,
+      footer: null,
+      viewContainerRef: this.viewContainerRef,
+    });
 
-    // modal.componentInstance?.approveChange
-    //   .pipe((x) => x)
-    //   .subscribe({
-    //     next: (res) => {
-    //       if (res) {
-    //         setTimeout(() => {
-    //           this.directForgotPassword(this._form.value.PhoneNumber);
-    //         }, 300);
-    //       }
-    //       modal.close();
-    //       this.cdr.detectChanges();
-    //     },
-    //   });
+    modal.componentInstance?.approveChange
+      .pipe((x) => x)
+      .subscribe({
+        next: (res) => {
+          if (res) {
+            setTimeout(() => {
+              this.directForgotPassword(this._form.value.PhoneNumber);
+            }, 300);
+          }
+          modal.close();
+          this.cdr.detectChanges();
+        },
+      });
     console.log('Hi');
   }
 

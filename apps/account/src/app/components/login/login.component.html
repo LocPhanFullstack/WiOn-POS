@@ -42,7 +42,6 @@
               maxlength="10"
               formControlName="PhoneNumber"
               placeholder="Nhập số điện thoại"
-              (input)="onInputPhoneNumber($event)"
             />
             <span tdsPrefix class="tds-body-2 flex self-center">+84</span>
           </tds-form-field>
@@ -83,7 +82,6 @@
             <input
               tdsInput
               wpPassword
-              (input)="onInputPassword()"
               type="password"
               size="xl"
               autocomplete="off"
@@ -106,16 +104,6 @@
             "
             >Vui lòng nhập mật khẩu</tds-error
           >
-
-          <div
-            *ngIf="!!alertMessage"
-            class="tds-color-background-error-minimal rounded-lg flex items-center w-full p-3 mt-5"
-          >
-            <i
-              class="tdsi-error-fill tds-icon-size-l tds-color-icon-error mr-3"
-            ></i>
-            <span class="break-words">{{ alertMessage }}</span>
-          </div>
 
           <button class="mt-5 w-full" type="submit" size="xl" tds-button>
             Đăng nhập
