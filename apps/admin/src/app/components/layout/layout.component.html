@@ -1,0 +1,241 @@
+<tds-spin [spinning]="loading" size="md" [indicator]="loadingIndicator">
+  <ng-container [ngSwitch]="errorStatus">
+    <ng-container *ngSwitchCase="'disconnect'">
+      <div class="h-screen w-screen p-2">
+        <wion-fnb-disconnect-error></wion-fnb-disconnect-error>
+      </div>
+    </ng-container>
+
+    <ng-container *ngSwitchDefault>
+      <tds-layout
+        class="h-screen w-screen overflow-hidden"
+        [class]="{ 'release-mode-layout': !isDevMode }"
+      >
+        <tds-layout-sider [tdsCollapsed]="isCollapsed" *ngIf="!hiddenSider">
+          <tds-menu
+            [data]="listMenu"
+            [matchRouter]="true"
+            [showLogo]="true"
+            [inlineCollapsed]="isCollapsed"
+            (onClickItem)="onClickMenu($event)"
+          >
+            <img
+              src="https://static-tds-public-projects.tmtco.org/branding-assets/logos/wi/wion-fnb/ver/dark.svg"
+              logo-text
+              class="mt-2"
+            />
+            <img
+              src="https://static-tds-public-projects.tmtco.org/branding-assets/logos/wi/wion-fnb/ver/dark.svg"
+              logo
+              class="mt-2"
+            />
+          </tds-menu>
+        </tds-layout-sider>
+
+        <tds-layout class="h-screen">
+          <tds-layout-header>
+            <tds-header (onToggle)="onToggleMenu($event)">
+              <div class="flex flex-row items-center tds-header-toolbar-right">
+                <!-- shop -->
+                <!-- <wion-pos-dropdown-select-shop
+                  [shopId]="{
+                    id: _signInData?.currentShop?.id,
+                    tenantId: _signInData?.currentBusiness?.tenantId,
+                    shopName: _signInData?.currentShop?.name
+                  }"
+                  [disable]="
+                    !_signInData?.hasActiveShop && !!_signInData?.isLocked
+                  "
+                  (selectChange)="onChangeShop($event)"
+                  (createBusinessClick)="createBusiness()"
+                  (createShopClick)="onCreateShop()"
+                  class="mr-2"
+                >
+                </wion-pos-dropdown-select-shop> -->
+
+                <!-- theme -->
+                <div class="!h-[50px] mr-2">
+                  <tds-theme-button></tds-theme-button>
+                </div>
+
+                <!-- account -->
+                <div
+                  tds-dropdown
+                  trigger="click"
+                  [tdsDropdownMenu]="dropdownUserInfo"
+                >
+                  <wp-image
+                    [imageUrl]="userInfo?.avatarUrl!"
+                    [id]="userInfo?.id"
+                    [styleClass]="
+                      'bg-tds-color-neutral-50-light dark:bg-tds-color-neutral-50-dark cursor-pointer'
+                    "
+                    [width]="32"
+                    [height]="32"
+                    [useTDSAvatar]="true"
+                  ></wp-image>
+                </div>
+
+                <tds-dropdown-menu #dropdownUserInfo="tdsDropdownMenu">
+                  <div class="w-[320px]">
+                    <div
+                      (click)="directToShop()"
+                      class="w-full flex items-center justify-between p-3"
+                      tds-dropdown-item
+                    >
+                      <div class="w-[calc(100%-24px)] flex items-center">
+                        <wp-image
+                          [imageUrl]="userInfo?.avatarUrl!"
+                          [id]="userInfo?.id"
+                          [styleClass]="
+                            'bg-tds-color-neutral-50-light dark:bg-tds-color-neutral-50-dark tds-color-icon-disable opacity-90'
+                          "
+                          [width]="48"
+                          [height]="48"
+                          [useTDSAvatar]="true"
+                        ></wp-image>
+                        <div class="w-[calc(100%-48px)] flex flex-col px-3">
+                          <div
+                            class="w-full truncate tds-color-text-primary font-semibold tds-body-1"
+                          >
+                            <span>{{
+                              userInfo?.name || 'Người dùng WiOn POS'
+                            }}</span>
+                          </div>
+                          <div
+                            class="max-w-full truncate tds-color-text-tertiary"
+                          >
+                            <span>{{ userInfo?.phoneNumber }}</span>
+                          </div>
+                        </div>
+                      </div>
+                      <span
+                        class="tdsi-chevron-right-fill tds-icon-size-l tds-color-icon-secondary"
+                      ></span>
+                    </div>
+                    <div
+                      *ngIf="
+                        _signInData?.currentBusiness?.isOwner &&
+                        !_signInData?.currentShop?.isHeadOffice
+                      "
+                      (click)="onVisiblePackageDrawer(true)"
+                      class="w-full py-2 px-3"
+                      tds-dropdown-item
+                    >
+                      <a class="flex items-center tds-body-2">
+                        <span
+                          class="tdsi-file-template-fill tds-icon-size-m tds-color-icon-secondary mr-2"
+                        ></span>
+                        Gói dịch vụ
+                      </a>
+                    </div>
+                    <div
+                      *ngIf="
+                        !!_signInData?.hasActiveShop || !_signInData?.isLocked
+                      "
+                      (click)="onChangePassword()"
+                      class="w-full py-2 px-3"
+                      tds-dropdown-item
+                    >
+                      <a class="flex items-center tds-body-2">
+                        <span
+                          class="tdsi-lock-fill tds-icon-size-m tds-color-icon-secondary mr-2"
+                        ></span>
+                        Đổi mật khẩu
+                      </a>
+                    </div>
+                    <div
+                      (click)="logOut()"
+                      class="w-full py-2 px-3"
+                      tds-dropdown-item
+                    >
+                      <a
+                        class="flex items-center tds-body-2 tds-color-text-error"
+                      >
+                        <span
+                          class="tdsi-log-out-fill tds-icon-size-m tds-color-icon-error mr-2"
+                        ></span>
+                        Đăng xuất
+                      </a>
+                    </div>
+                  </div>
+                </tds-dropdown-menu>
+              </div>
+            </tds-header>
+
+            <tds-layout-content
+              class="overflow-auto tds-color-surface-sunken-light dark:tds-color-surface-sunken-dark relative"
+            >
+              <div
+                class="absolute inset-0 overflow-y-auto overflow-x-visible tds-custom-scroll"
+                cdkScrollable
+              >
+                <router-outlet></router-outlet>
+              </div>
+            </tds-layout-content>
+          </tds-layout-header>
+        </tds-layout>
+      </tds-layout>
+    </ng-container>
+  </ng-container>
+
+  <ng-template #loadingIndicator>
+    <div
+      class="w-full h-full flex flex-col items-center justify-center tds-body-2"
+    >
+      <tds-spinner [color]="'primary'" class="w-8 h-8 mb-2"></tds-spinner>
+      <div class="tds-color-text-primary">Đăng nhập vào cửa hàng...</div>
+    </div>
+  </ng-template>
+</tds-spin>
+
+<!-- <tds-drawer
+  [(visible)]="visibleMenu"
+  [width]="256"
+  [closable]="false"
+  [bodyStyle]="{ padding: 0 }"
+  [placement]="'left'"
+  [title]="undefined"
+  [footer]="undefined"
+  (onClose)="onToggleMenu($event)"
+>
+  <ng-container *tdsDrawerContent>
+    <tds-menu [data]="listMenu" [showLogo]="true">
+      <img
+        src="https://static-tds-public-projects.tmtco.org/branding-assets/logos/wi/wion-fnb/ver/dark.svg"
+        logo-text
+        class="h-10"
+      />
+      <img
+        src="https://static-tds-public-projects.tmtco.org/branding-assets/logos/wi/wion-fnb/ver/dark.svg"
+        logo
+        class="h-10"
+      />
+    </tds-menu>
+  </ng-container>
+</tds-drawer> -->
+
+<!-- <ng-template #offlineTmp let-offline="data">
+  <div *ngIf="!offline" class="flex items-center">
+    <span
+      class="tdsi-wifi-fill tds-notification-color-icon-success text-2xl !leading-6 mr-4"
+    ></span
+    ><span>Đã khôi phục lại internet.</span>
+  </div>
+
+  <div *ngIf="offline" class="flex flex-row items-start">
+    <div
+      class="tdsi-wifi-off-fill tds-notification-color-icon-error text-2xl !leading-6"
+    ></div>
+    <div class="ml-4">
+      <div
+        class="tds-body-1 font-semibold tds-notification-color-text-default mb-2"
+      >
+        Lỗi kết nối internet
+      </div>
+      <div class="tds-notification-color-text-default">
+        Kết nối đường truyền mạng bị kém. Bạn vui lòng thử lại sau.
+      </div>
+    </div>
+  </div>
+</ng-template> -->

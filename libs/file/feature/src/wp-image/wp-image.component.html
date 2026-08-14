@@ -1,0 +1,83 @@
+<tds-spin
+  [spinning]="loading[id]"
+  [size]="spinningSize ?? (width! > 60 || height! > 60 ? 'md' : 'sm')"
+  [ngStyle]="{
+    width: width ? width + 'px' : '100%',
+    height: height ? height + 'px' : '100%'
+  }"
+>
+  <div
+    [ngStyle]="{
+      width: width ? width + 'px' : '100%',
+      height: height ? height + 'px' : '100%'
+    }"
+    class="flex items-center justify-center"
+  >
+    <img
+      *ngIf="imageUrl && !errors[id]; else emptyImg"
+      [src]="imageUrl | tdsMapper : mapperSource : loading[id]"
+      [ngStyle]="{
+        width: width ? width + 'px' : '100%',
+        height: height ? height + 'px' : '100%',
+        'border-radius.px': radius
+      }"
+      (error)="avatarHasError(id)"
+      (load)="avatarLoaded(id)"
+      class="object-cover"
+      [ngClass]="styleClass"
+    />
+  </div>
+</tds-spin>
+
+<ng-template #emptyImg>
+  <div *ngIf="!useTDSAvatar" class="w-full h-full flex">
+    <img
+      *ngIf="errorImage"
+      [src]="errorImage"
+      class="object-cover z-0"
+      [ngClass]="errorStyleClass ?? styleClass"
+      [ngStyle]="{
+        width: width ? width + 'px' : '100%',
+        height: height ? height + 'px' : '100%',
+        'border-radius.px': radius
+      }"
+    />
+
+    <div
+      *ngIf="!errorImage"
+      class="flex items-center justify-center z-0"
+      [ngClass]="errorStyleClass ?? styleClass"
+      [ngStyle]="{
+        width: width ? width + 'px' : '100%',
+        height: height ? height + 'px' : '100%',
+        'border-radius.px': radius
+      }"
+    >
+      <span
+        [ngClass]="icon"
+        class="z-[5]"
+        [ngStyle]="{
+          'font-size': iconSize
+            ? iconSize + 'px'
+            : height
+            ? height + 'px'
+            : '100%',
+          'line-height': iconSize
+            ? iconSize + 'px'
+            : height
+            ? height + 'px'
+            : '100%'
+        }"
+      >
+      </span>
+    </div>
+  </div>
+  <div *ngIf="useTDSAvatar" class="w-full h-full flex">
+    <tds-avatar
+      [tdsSrc]="errorImage! | tdsMapper : mapperSource"
+      [icon]="icon"
+      [size]="height ?? width ?? iconSize ?? 'md'"
+      [ngClass]="errorStyleClass ?? styleClass"
+    ></tds-avatar>
+  </div>
+</ng-template>

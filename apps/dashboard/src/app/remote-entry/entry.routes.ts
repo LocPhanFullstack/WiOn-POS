@@ -1,6 +1,6 @@
 import { Route } from '@angular/router';
-import { DashboardLayoutComponent } from '@wion-fnb/dashboard/feature';
 import { RemoteEntryComponent } from './entry.component';
+import { DashboardLayoutComponent } from '../components';
 
 export const remoteRoutes: Route[] = [
   {

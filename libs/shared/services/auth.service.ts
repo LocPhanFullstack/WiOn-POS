@@ -8,7 +8,7 @@ import {
 } from 'tds-ui/shared/utility';
 import { SignInService } from '@wion-fnb/account/data-access';
 import { WPTokenDTO } from '@wion-fnb/shared/components';
-import { FNBKEY_ACCESSTOKEN } from '../tokens/key-accesstoken.token';
+import { FNBKEY_ACCESSTOKEN } from '../components/tokens/key-accesstoken.token';
 import { CacheHelperService } from '../utils/helpers/cache-helper.service';
 
 @Injectable({

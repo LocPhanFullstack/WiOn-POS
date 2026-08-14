@@ -1,7 +1,7 @@
 import { Route } from '@angular/router';
 import { loadRemoteModule } from '@nx/angular/mf';
 import { WAuthGuardService } from '@wion-fnb/shared/services';
-import { LayoutComponent } from './layout/layout.component';
+import { LayoutComponent } from './components';
 
 export const appRoutes: Route[] = [
   {
@@ -17,7 +17,12 @@ export const appRoutes: Route[] = [
       {
         path: 'dashboard',
         loadChildren: () =>
-          loadRemoteModule('dashboard', './Routes').then((m) => m.remoteRoutes),
+          loadRemoteModule('dashboard', './Routes')
+            .then((m) => {
+              console.log('remote module:', m);
+              return m.remoteRoutes;
+            })
+            .catch((err) => console.error('load remote failed:', err)),
       },
     ],
   },
