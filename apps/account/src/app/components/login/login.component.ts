@@ -50,7 +50,7 @@ import {
   WPPhoneNumberDirective,
 } from '@wion-fnb/shared/directives';
 import { DateHelperService } from 'tds-ui/i18n';
-import { ModalForgotPasswordComponent } from '@wion-fnb/account/feature';
+// import { ModalForgotPasswordComponent } from '@wion-fnb/account/feature';
 import { WIMfConfigService } from '@wi-mfes/config';
 
 const directives = [WPPasswordDirective, WPPhoneNumberDirective];
@@ -291,32 +291,32 @@ export class LoginComponent implements OnInit {
   }
 
   openForgotPassword(event?: MouseEvent) {
-    event?.preventDefault();
-    event?.stopImmediatePropagation();
+    // event?.preventDefault();
+    // event?.stopImmediatePropagation();
 
-    const modal = this.modalService.create({
-      content: ModalForgotPasswordComponent,
-      bodyStyle: {
-        padding: '24px',
-      },
-      closable: false,
-      footer: null,
-      viewContainerRef: this.viewContainerRef,
-    });
+    // const modal = this.modalService.create({
+    //   content: ModalForgotPasswordComponent,
+    //   bodyStyle: {
+    //     padding: '24px',
+    //   },
+    //   closable: false,
+    //   footer: null,
+    //   viewContainerRef: this.viewContainerRef,
+    // });
 
-    modal.componentInstance?.approveChange
-      .pipe((x) => x)
-      .subscribe({
-        next: (res) => {
-          if (res) {
-            setTimeout(() => {
-              this.directForgotPassword(this._form.value.PhoneNumber);
-            }, 300);
-          }
-          modal.close();
-          this.cdr.detectChanges();
-        },
-      });
+    // modal.componentInstance?.approveChange
+    //   .pipe((x) => x)
+    //   .subscribe({
+    //     next: (res) => {
+    //       if (res) {
+    //         setTimeout(() => {
+    //           this.directForgotPassword(this._form.value.PhoneNumber);
+    //         }, 300);
+    //       }
+    //       modal.close();
+    //       this.cdr.detectChanges();
+    //     },
+    //   });
     console.log('Hi');
   }
 

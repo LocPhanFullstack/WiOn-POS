@@ -19,9 +19,11 @@
         "libs/account/data-access/src/index.ts"
       ],
       "@wion-fnb/account/feature": ["libs/account/feature/src/index.ts"],
-      "@wion-fnb/account/ui": ["libs/account/ui/src/index.ts"],
+
       "@wion-fnb/dashboard/feature": ["libs/dashboard/feature/src/index.ts"],
+
       "@wion-fnb/file/data-access": ["libs/file/data-access/src/index.ts"],
+      
       "@wion-fnb/shared/tokens": ["libs/shared/tokens/index.ts"],
       "@wion-fnb/shared/services": ["libs/shared/services/index.ts"],
       "@wion-fnb/shared/utils": ["libs/shared/utils/index.ts"],
