@@ -5,3 +5,4 @@ export * from './errors-helper.service';
 export * from './shop-permission.service';
 export * from './menu-permission.service';
 export * from './ternant-url.helper';
+export * from './string-helper.service';

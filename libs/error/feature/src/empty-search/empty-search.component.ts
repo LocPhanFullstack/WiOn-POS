@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
 import { TDSIllustrationModule } from 'tds-ui/illustration';
 
 @Component({
-  selector: 'wion-pos-empty-search',
+  selector: 'wion-fnb-empty-search',
   standalone: true,
   templateUrl: './empty-search.component.html',
   styles: [],

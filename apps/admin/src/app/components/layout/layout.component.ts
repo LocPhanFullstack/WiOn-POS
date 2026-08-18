@@ -87,7 +87,7 @@ import {
 } from 'tds-ui/notification';
 import { TDSToolTipModule } from 'tds-ui/tooltip';
 import { CdkScrollableModule, ScrollingModule } from '@angular/cdk/scrolling';
-// import { ModalChangePasswordComponent } from '@wion-fnb/account/feature';
+import { ModalChangePasswordComponent } from '@wion-fnb/account/feature';
 // import { ModalResponseInvitationComponent } from '@wion-fnb/shop/feature';
 import { RoleService } from '@wion-fnb/account/data-access';
 // import {
@@ -1418,27 +1418,27 @@ export class LayoutComponent implements OnInit {
   }
 
   onChangePassword() {
-    // this.errorsHelperService.setOpenModal(true);
-    // const modal = this.modalService.create({
-    //   content: ModalChangePasswordComponent,
-    //   bodyStyle: {
-    //     padding: '0',
-    //   },
-    //   footer: null,
-    //   closable: false,
-    //   viewContainerRef: this.viewContainerRef,
-    // });
-    // modal.componentInstance?.completeChangePassword
-    //   ?.pipe(takeUntil(this.destroy$))
-    //   .subscribe({
-    //     next: (res: any) => {
-    //       if (res) {
-    //         this.logOut();
-    //       }
-    //       modal.close();
-    //       this.errorsHelperService.setOpenModal(false);
-    //     },
-    //   });
+    this.errorsHelperService.setOpenModal(true);
+    const modal = this.modalService.create({
+      content: ModalChangePasswordComponent,
+      bodyStyle: {
+        padding: '0',
+      },
+      footer: null,
+      closable: false,
+      viewContainerRef: this.viewContainerRef,
+    });
+    modal.componentInstance?.completeChangePassword
+      ?.pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (res: any) => {
+          if (res) {
+            this.logOut();
+          }
+          modal.close();
+          this.errorsHelperService.setOpenModal(false);
+        },
+      });
   }
 
   get isDevMode() {
