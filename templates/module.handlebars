@@ -1,0 +1,116 @@
+/* tslint:disable */
+/* eslint-disable */
+
+
+import {
+  NgModule,
+  ModuleWithProviders,
+  Provider,
+  FactoryProvider,
+  ValueProvider,
+  EnvironmentProviders,
+  makeEnvironmentProviders
+} from '@angular/core';
+import { {{configurationClass}}, {{configurationClass}}Token } from './{{configurationFile}}';
+
+{{#services}}import { {{typeName}} } from './services/{{fileName}}';
+{{/services}}
+
+/**
+ * All API services
+ */
+export const {{moduleClass}}Services: Provider[] = [
+{{#services}}  {{typeName}},
+{{/services}}
+];
+
+/**
+ * Flexible config type (support dynamic rootUrl)
+ */
+export type {{moduleClass}}Config =
+  Partial<{
+    [K in keyof {{configurationClass}}]:
+      {{configurationClass}}[K] | (() => {{configurationClass}}[K]);
+  }>;
+
+/**
+ * Config input type
+ */
+export type {{moduleClass}}ConfigInput =
+  | {{moduleClass}}Config
+  | {
+      useFactory: (...args: any[]) => {{moduleClass}}Config;
+      deps?: any[];
+    };
+/**
+ * Create config provider
+ */
+ export function create{{moduleClass}}ConfigProvider(
+  config: {{moduleClass}}ConfigInput
+): Provider {
+
+  return (config as any).useFactory
+    ? {
+        provide: {{configurationClass}}Token,
+        useFactory: (config as any).useFactory,
+        deps: (config as any).deps || []
+      } as FactoryProvider
+    : {
+        provide: {{configurationClass}}Token,
+        useValue: config
+      } as ValueProvider;
+}
+
+/**
+* Cấu hình các provider cho module, bao gồm cả config và các service
+*/
+ export function create{{moduleClass}}Providers(
+  config: {{moduleClass}}ConfigInput,
+  services: Provider[]
+): Provider[] {
+
+  const configProvider = (config as any).useFactory
+    ? {
+        provide: {{configurationClass}}Token,
+        useFactory: (config as any).useFactory,
+        deps: (config as any).deps || []
+      } as FactoryProvider
+    : {
+        provide: {{configurationClass}}Token,
+        useValue: config
+      } as ValueProvider;
+  return [configProvider, ...services];
+}
+
+/**
+ * NgModule version
+ */
+@NgModule()
+export class {{moduleClass}} {
+
+  static forRoot(
+    config: {{moduleClass}}ConfigInput
+  ): ModuleWithProviders<{{moduleClass}}> {
+
+    return {
+      ngModule: {{moduleClass}},
+      providers: [
+        ...create{{moduleClass}}Providers(config, {{moduleClass}}Services)
+      ]
+    };
+  }
+}
+
+
+/**
+ *  Cấu hình tất cả các service và config cho module, sử dụng makeEnvironmentProviders
+ *  Sử dụng provide{{moduleClass}} trong môi trường standalone để cung cấp các provider cho module 
+ */
+export function provide{{moduleClass}}(
+  config: {{moduleClass}}ConfigInput  
+): EnvironmentProviders  {
+  return makeEnvironmentProviders([
+    create{{moduleClass}}ConfigProvider(config),
+    ...{{moduleClass}}Services
+  ]);
+}

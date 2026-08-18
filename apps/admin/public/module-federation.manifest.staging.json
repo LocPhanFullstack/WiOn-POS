@@ -13,6 +13,10 @@
     "dashboard": {
       "url": "http://localhost:4202",
       "config": {}
+    },
+    "shop": {
+      "url": "http://localhost:4203",
+      "config": {}
     }
   }
 }

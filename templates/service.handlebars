@@ -1,0 +1,24 @@
+/* tslint:disable */
+/* eslint-disable */
+import { HttpClient, HttpContext } from '@angular/common/http';
+import { Inject,inject, Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+import { {{baseServiceClass}} } from '../{{baseServiceFile}}';
+import { {{configurationClass}}, {{configurationClass}}Token } from '../{{configurationFile}}';
+import { {{responseClass}} } from '../{{responseFile}}';
+
+{{#imports}}import { {{{typeName}}}{{#useAlias}} as {{{qualifiedName}}}{{/useAlias}} } from '{{{@root.pathToRoot}}}{{{fullPath}}}';
+{{/imports}}
+
+{{{tsComments}}}@Injectable()
+export class {{typeName}} extends {{baseServiceClass}} {
+  override config: {{configurationClass}} = inject({{configurationClass}}Token);
+  override http: HttpClient = inject(HttpClient);
+
+{{#operations}}
+{{>operationPath}}
+{{#variants}}{{>operationResponse}}{{>operationBody}}{{/variants}}
+{{/operations}}
+}

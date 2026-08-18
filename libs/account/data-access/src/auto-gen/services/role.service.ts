@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import { HttpClient, HttpContext } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { Inject,inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -22,7 +22,7 @@ import { RoleGetCurrentRolePermissions$Params } from '../fn/role/role-get-curren
 import { roleUpdateRole } from '../fn/role/role-update-role';
 import { RoleUpdateRole$Params } from '../fn/role/role-update-role';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class RoleService extends FNBAccountBaseService {
   override config: FNBAccountApiConfiguration = inject(FNBAccountApiConfigurationToken);
   override http: HttpClient = inject(HttpClient);

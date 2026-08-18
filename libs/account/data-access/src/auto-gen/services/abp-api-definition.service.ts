@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import { HttpClient, HttpContext } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { Inject,inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -13,7 +13,7 @@ import { abpApiDefinitionGet } from '../fn/abp-api-definition/abp-api-definition
 import { AbpApiDefinitionGet$Params } from '../fn/abp-api-definition/abp-api-definition-get';
 import { ApplicationApiDescriptionModel } from '../models/application-api-description-model';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class AbpApiDefinitionService extends FNBAccountBaseService {
   override config: FNBAccountApiConfiguration = inject(FNBAccountApiConfigurationToken);
   override http: HttpClient = inject(HttpClient);

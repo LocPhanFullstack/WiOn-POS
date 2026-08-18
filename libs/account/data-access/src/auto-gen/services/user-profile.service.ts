@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import { HttpClient, HttpContext } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { Inject,inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -22,7 +22,7 @@ import { UserProfileGetUserProfile$Params } from '../fn/user-profile/user-profil
 import { userProfileUpdateUserProfile } from '../fn/user-profile/user-profile-update-user-profile';
 import { UserProfileUpdateUserProfile$Params } from '../fn/user-profile/user-profile-update-user-profile';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class UserProfileService extends FNBAccountBaseService {
   override config: FNBAccountApiConfiguration = inject(FNBAccountApiConfigurationToken);
   override http: HttpClient = inject(HttpClient);

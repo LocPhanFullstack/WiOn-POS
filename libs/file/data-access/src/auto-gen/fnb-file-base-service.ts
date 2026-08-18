@@ -1,6 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
-import { inject, Injectable } from '@angular/core';
+import { inject, Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FNBFileApiConfiguration, FNBFileApiConfigurationToken } from './fnb-file-api-configuration';
 

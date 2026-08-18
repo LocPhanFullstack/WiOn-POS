@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import { HttpClient, HttpContext } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { Inject,inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -36,7 +36,7 @@ import { BusinessUpdateShopData$Params } from '../fn/business/business-update-sh
 import { InitializationStatusDto } from '../models/initialization-status-dto';
 import { PagedResultDtoOfBusinessListItemDto } from '../models/paged-result-dto-of-business-list-item-dto';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class BusinessService extends FNBAccountBaseService {
   override config: FNBAccountApiConfiguration = inject(FNBAccountApiConfigurationToken);
   override http: HttpClient = inject(HttpClient);

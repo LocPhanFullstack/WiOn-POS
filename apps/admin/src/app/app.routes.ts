@@ -15,14 +15,19 @@ export const appRoutes: Route[] = [
     canActivate: [WAuthGuardService],
     children: [
       {
+        path: 'shop',
+        loadChildren: () =>
+          loadRemoteModule('shop', './Routes').then((m) => m.remoteRoutes),
+      },
+      {
         path: 'dashboard',
         loadChildren: () =>
-          loadRemoteModule('dashboard', './Routes')
-            .then((m) => {
-              console.log('remote module:', m);
-              return m.remoteRoutes;
-            })
-            .catch((err) => console.error('load remote failed:', err)),
+          loadRemoteModule('dashboard', './Routes').then((m) => m.remoteRoutes),
+      },
+      {
+        path: '',
+        redirectTo: '/dashboard/overview',
+        pathMatch: 'full',
       },
     ],
   },

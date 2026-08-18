@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import { HttpClient, HttpContext } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { Inject,inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -32,7 +32,7 @@ import { SignUpVerifySmsOtp$Params } from '../fn/sign-up/sign-up-verify-sms-otp'
 import { signUpVerifySmsOtp2 } from '../fn/sign-up/sign-up-verify-sms-otp-2';
 import { SignUpVerifySmsOtp2$Params } from '../fn/sign-up/sign-up-verify-sms-otp-2';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class SignUpService extends FNBAccountBaseService {
   override config: FNBAccountApiConfiguration = inject(FNBAccountApiConfigurationToken);
   override http: HttpClient = inject(HttpClient);

@@ -1,0 +1,22 @@
+/* tslint:disable */
+/* eslint-disable */
+import { InjectionToken } from '@angular/core';
+
+/**
+ * Global configuration
+ */
+export class {{configurationClass}} {
+ rootUrl?: string | (() => string);
+}
+
+/**
+ * DI token for {{configurationClass}}
+ */
+export const {{configurationClass}}Token = new InjectionToken<{{configurationClass}}>('{{configurationClass}}');
+
+/**
+ * Parameters for `{{moduleClass}}.forRoot()`
+ */
+export interface {{configurationParams}} {
+ rootUrl?: string | (() => string);
+}

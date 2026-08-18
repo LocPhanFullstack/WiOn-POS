@@ -1,0 +1,42 @@
+.traingle-light {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 10px 10px 10px;
+  border-color: transparent transparent #e0f6e7 transparent;
+  margin-left: 44px;
+}
+
+.traingle-dark {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 10px 10px 10px;
+  border-color: transparent transparent #1a3526 transparent;
+  margin-left: 44px;
+}
+
+.bg-gradient-button-1 {
+  background-image: linear-gradient(
+    to right,
+    rgba(72, 202, 147, 1),
+    rgba(72, 186, 202, 1)
+  );
+}
+
+.border-gradient-button-1 {
+  background-image: linear-gradient(
+    to left,
+    rgba(72, 202, 147, 1),
+    rgba(72, 186, 202, 1)
+  );
+}
+
+:host {
+  display: block;
+  height: 100%;
+}
+
+:host ::ng-deep .tds-spin {
+  height: 100%;
+}

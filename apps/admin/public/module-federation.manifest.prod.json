@@ -13,6 +13,10 @@
     "dashboard": {
       "url": "apps/dashboard",
       "config": {}
+    },
+    "shop": {
+      "url": "apps/shop",
+      "config": {}
     }
   }
 }

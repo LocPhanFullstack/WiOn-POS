@@ -1,6 +1,6 @@
 import { setRemoteDefinitions } from '@nx/angular/mf';
 import type { WIMfManifest } from '@wi-mfes/config';
-const getBaseUrl = ():string => {
+const getBaseUrl = (): string => {
   let elem = document.getElementsByTagName('wion-assets')[0];
   if (typeof elem != 'undefined' && elem != null) {
     return elem.getAttribute('data-assets') || '';
@@ -25,9 +25,11 @@ fetch(getAssetsUrl())
     console.log('Fetched manifest: ', manifest);
     // Extract URLs for Nx Module Federation
     const remoteUrls: Record<string, string> = {};
-    Object.entries(manifest.remotes).forEach(([name, config]: [string, any]) => {
-      remoteUrls[name] = config.url;
-    });
+    Object.entries(manifest.remotes).forEach(
+      ([name, config]: [string, any]) => {
+        remoteUrls[name] = config.url;
+      }
+    );
     // Add baseUrl for non-local environments
     if (!isLocalHost()) {
       const baseUrl = getBaseUrl();
@@ -42,8 +44,8 @@ fetch(getAssetsUrl())
     const { setManifest } = await import('@wi-mfes/config');
     setManifest(manifest);
   })
-  .then(() =>{
-     import('./bootstrap').catch((err) => console.error(err))
+  .then(() => {
+    import('./bootstrap').catch((err) => console.error(err));
   })
   .catch((err) => {
     console.error('[Host] Failed to load manifest:', err);

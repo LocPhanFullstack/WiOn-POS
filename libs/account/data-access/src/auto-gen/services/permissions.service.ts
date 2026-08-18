@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import { HttpClient, HttpContext } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { Inject,inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -15,7 +15,7 @@ import { PermissionsGet$Params } from '../fn/permissions/permissions-get';
 import { permissionsUpdate } from '../fn/permissions/permissions-update';
 import { PermissionsUpdate$Params } from '../fn/permissions/permissions-update';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class PermissionsService extends FNBAccountBaseService {
   override config: FNBAccountApiConfiguration = inject(FNBAccountApiConfigurationToken);
   override http: HttpClient = inject(HttpClient);

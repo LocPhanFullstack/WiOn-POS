@@ -15,7 +15,7 @@ const config: ModuleFederationConfig = {
    * declare module 'my-external-remote';
    *
    */
-  remotes: ['account', 'dashboard'],
+  remotes: ['account', 'dashboard', 'shop'],
   ...sharedConfig,
 };
 

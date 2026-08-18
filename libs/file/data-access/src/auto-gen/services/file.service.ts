@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import { HttpClient, HttpContext } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { Inject,inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -12,7 +12,7 @@ import { FNBFileStrictHttpResponse } from '../fnb-file-strict-http-response';
 import { fileDeleteWithUrlProxy } from '../fn/file/file-delete-with-url-proxy';
 import { FileDeleteWithUrlProxy$Params } from '../fn/file/file-delete-with-url-proxy';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class FileService extends FNBFileBaseService {
   override config: FNBFileApiConfiguration = inject(FNBFileApiConfigurationToken);
   override http: HttpClient = inject(HttpClient);

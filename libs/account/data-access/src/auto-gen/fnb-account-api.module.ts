@@ -1,8 +1,17 @@
 /* tslint:disable */
 /* eslint-disable */
-import { NgModule, ModuleWithProviders, SkipSelf, Optional, Provider, ValueProvider, FactoryProvider, EnvironmentProviders, makeEnvironmentProviders } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { FNBAccountApiConfiguration, FNBAccountApiConfigurationParams, FNBAccountApiConfigurationToken } from './fnb-account-api-configuration';
+
+
+import {
+  NgModule,
+  ModuleWithProviders,
+  Provider,
+  FactoryProvider,
+  ValueProvider,
+  EnvironmentProviders,
+  makeEnvironmentProviders
+} from '@angular/core';
+import { FNBAccountApiConfiguration, FNBAccountApiConfigurationToken } from './fnb-account-api-configuration';
 
 import { AccountService } from './services/account.service';
 import { BusinessService } from './services/business.service';
@@ -29,6 +38,7 @@ import { TenantService } from './services/tenant.service';
 import { FeaturesService } from './services/features.service';
 import { AbpApplicationConfigurationService } from './services/abp-application-configuration.service';
 import { AbpApiDefinitionService } from './services/abp-api-definition.service';
+
 /**
  * All API services
  */
@@ -58,7 +68,6 @@ export const FNBAccountApiModuleServices: Provider[] = [
   FeaturesService,
   AbpApplicationConfigurationService,
   AbpApiDefinitionService,
-  FNBAccountApiConfiguration
 ];
 
 /**

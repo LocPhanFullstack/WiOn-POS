@@ -1,8 +1,17 @@
 /* tslint:disable */
 /* eslint-disable */
-import { NgModule, ModuleWithProviders, SkipSelf, Optional, Provider, FactoryProvider, ValueProvider, EnvironmentProviders, makeEnvironmentProviders } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { FNBFileApiConfiguration, FNBFileApiConfigurationParams, FNBFileApiConfigurationToken } from './fnb-file-api-configuration';
+
+
+import {
+  NgModule,
+  ModuleWithProviders,
+  Provider,
+  FactoryProvider,
+  ValueProvider,
+  EnvironmentProviders,
+  makeEnvironmentProviders
+} from '@angular/core';
+import { FNBFileApiConfiguration, FNBFileApiConfigurationToken } from './fnb-file-api-configuration';
 
 import { SampleService } from './services/sample.service';
 import { CustomerManagementService } from './services/customer-management.service';
@@ -11,18 +20,18 @@ import { MediaService } from './services/media.service';
 import { ProductManagementService } from './services/product-management.service';
 import { AbpApplicationConfigurationService } from './services/abp-application-configuration.service';
 import { AbpApiDefinitionService } from './services/abp-api-definition.service';
+
 /**
  * All API services
  */
 export const FNBFileApiModuleServices: Provider[] = [
   SampleService,
-    CustomerManagementService,
-    FileService,
-    MediaService,
-    ProductManagementService,
-    AbpApplicationConfigurationService,
-    AbpApiDefinitionService,
-    FNBFileApiConfiguration
+  CustomerManagementService,
+  FileService,
+  MediaService,
+  ProductManagementService,
+  AbpApplicationConfigurationService,
+  AbpApiDefinitionService,
 ];
 
 /**

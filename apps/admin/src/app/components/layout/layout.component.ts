@@ -939,7 +939,7 @@ export class LayoutComponent implements OnInit {
   };
 
   directToShop() {
-    // this.router.navigateByUrl(buildTenantUrl(this.shopUrl, this.identity));
+    this.router.navigateByUrl(buildTenantUrl(this.shopUrl, this.identity));
   }
 
   showLogoutModal() {

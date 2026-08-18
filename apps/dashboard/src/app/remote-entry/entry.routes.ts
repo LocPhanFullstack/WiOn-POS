@@ -15,8 +15,8 @@ export const remoteRoutes: Route[] = [
       },
       {
         path: 'overview',
-        component: DashboardLayoutComponent
+        component: DashboardLayoutComponent,
       },
-    ]
+    ],
   },
 ];

@@ -1,0 +1,234 @@
+<div class="w-full h-full overflow-hidden">
+  <ng-container [ngSwitch]="errorStatus">
+    <!-- Internal server error -->
+    <ng-container *ngSwitchCase="'internal-server'">
+      <div class="absolute inset-0 !top-[50px] z-50 p-2">
+        <wion-fnb-internal-server-error></wion-fnb-internal-server-error>
+      </div>
+    </ng-container>
+
+    <!-- Unknown error -->
+    <ng-container *ngSwitchCase="'unknow'">
+      <div class="absolute inset-0 !top-[50px] z-50 p-2">
+        <wion-fnb-unknown-error></wion-fnb-unknown-error>
+      </div>
+    </ng-container>
+
+    <!-- Default -->
+    <ng-container *ngSwitchDefault>
+      <tds-spin
+        class="block w-full h-full"
+        [spinning]="isLoading"
+        size="md"
+        tip="Đang tải..."
+      >
+        <div
+          class="w-full h-full flex justify-center overflow-auto tds-custom-scroll tds-body-2 tds-color-text-primary"
+        >
+          <div class="w-full h-full flex gap-2 p-2">
+            <!-- Profile -->
+            <tds-card class="w-1/3 h-full shrink-0">
+              <div
+                class="w-full h-full flex flex-col overflow-hidden rounded-md tds-color-surface-lowest"
+              >
+                <!-- Profile header -->
+                <div class="relative w-full shrink-0">
+                  <!-- Banner -->
+                  <div
+                    class="w-full h-[76px] rounded-b-3xl bg-[linear-gradient(358.82deg,#55D986_-6.13%,#04BDBD_103.68%),linear-gradient(0deg,rgba(0,0,0,0.1),rgba(0,0,0,0.1))]"
+                  ></div>
+
+                  <!-- Avatar -->
+                  <div
+                    class="absolute inset-x-0 top-[32px] flex justify-center"
+                  >
+                    <div class="rounded-full border-4 border-white">
+                      <wp-image
+                        [imageUrl]="author?.avatarUrl"
+                        [id]="author?.id"
+                        [width]="80"
+                        [height]="80"
+                        [useTDSAvatar]="true"
+                        styleClass="bg-tds-color-neutral-50-light dark:bg-tds-color-neutral-50-dark tds-color-icon-disable"
+                      ></wp-image>
+                    </div>
+                  </div>
+
+                  <!-- User information -->
+                  <div class="w-full p-4">
+                    <div class="w-full pt-9 text-center truncate">
+                      <span
+                        class="tds-heading-5 font-semibold tds-color-text-primary"
+                        tds-tooltip="{{ author?.name ?? '' }}"
+                      >
+                        {{ author?.name ?? 'Người dùng WiOn POS' }}
+                      </span>
+                    </div>
+
+                    <!-- Actions -->
+                    <div
+                      *ngIf="
+                        _signInData?.hasActiveShop || !_signInData?.isLocked
+                      "
+                      class="w-full flex items-center justify-center gap-2 mt-3"
+                    >
+                      <button tds-button color="info" (click)="onEditProfile()">
+                        Chỉnh sửa
+                      </button>
+
+                      <button
+                        tds-button
+                        color="secondary"
+                        (click)="onChangePassword()"
+                      >
+                        Đổi mật khẩu
+                      </button>
+
+                      <!-- <button
+                        tds-button-outline-icon
+                        tds-dropdown
+                        color="secondary"
+                        trigger="click"
+                        class="wp-release-hidden"
+                        [tdsDropdownMenu]="dropdownStore"
+                        placement="bottomRight"
+                        [backdrop]="true"
+                      >
+                        <i class="tdsi-three-dots-horizon-fill"></i>
+                      </button>
+
+                      <tds-dropdown-menu #dropdownStore="tdsDropdownMenu">
+                        <div class="w-[170px]">
+                          <div tds-dropdown-item class="px-3 py-2">
+                            <span class="flex items-center tds-body-2">
+                              <i
+                                class="mr-2 tds-icon-size-s tdsi-trash-fill tds-color-icon-error"
+                              ></i>
+                              Xóa tài khoản
+                            </span>
+                          </div>
+                        </div>
+                      </tds-dropdown-menu> -->
+                    </div>
+
+                    <!-- Contact information -->
+                    <div
+                      class="w-full mt-3 px-3 py-1 border rounded-lg tds-color-border-secondary"
+                    >
+                      <div
+                        class="w-full flex items-center py-2.5 border-b tds-color-border-secondary"
+                      >
+                        <span class="w-[48px] mr-4 font-semibold"> SĐT </span>
+
+                        <span class="tds-body-2 max-w-full truncate">
+                          {{ author?.phoneNumber || '---' }}
+                        </span>
+                      </div>
+
+                      <div class="w-full flex items-center py-2.5">
+                        <span class="w-[48px] mr-4 font-semibold"> Email </span>
+
+                        <span class="tds-body-2 max-w-full truncate">
+                          {{ author?.email || '---' }}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  *ngIf="
+                    listBusiness
+                      | tdsMapper : mapperActiveBusinesses as activeBusinesses
+                  "
+                  class="flex-auto overflow-hidden tds-color-surface-lowest"
+                >
+                  <!-- danh sách doanh nghiệp -->
+                  <div
+                    class="flex flex-col w-full h-full"
+                    [class]="{
+                      'border-t border-dashed tds-color-border-neutral-minimalist pt-3':
+                        activeBusinesses.length > 0
+                    }"
+                  >
+                    <div
+                      *ngIf="activeBusinesses.length === 0"
+                      class="flex items-center justify-between w-full px-4"
+                    >
+                      <span class="font-semibold"
+                        >Doanh nghiệp ({{ activeBusinesses.length }})</span
+                      >
+                      <!-- <div class="h-9 flex items-center justify-center">
+                        <button
+                          *ngIf="
+                            listBusiness
+                              | tdsMapper : mapperAllowedCreateBusiness
+                          "
+                          tds-button-flat
+                          color="primary"
+                          size="sm"
+                          [tdsThrottleTime]="750"
+                          (tdsBtnClick)="onCreateBusiness($event)"
+                        >
+                          Thêm doanh nghiệp
+                        </button>
+                      </div> -->
+                    </div>
+                    <div
+                      *ngIf="businessTest.length > 0"
+                      class="flex-auto overflow-hidden"
+                    >
+                      <div
+                        class="overflow-auto tds-panel-scroll h-full w-full px-4"
+                      >
+                        <div
+                          *ngFor="let business of businessTest"
+                          class="w-full flex items-center justify-between hover:tds-color-background-neutral-minimalist cursor-pointer rounded-md px-2 py-2.5"
+                          [class]="{
+                            'tds-color-background-neutral-minimalist':
+                              currentBusiness?.id == business.id
+                          }"
+                          (click)="onSelectBusiness(business.id!)"
+                        >
+                          <div
+                            class="flex items-center"
+                            [class]="
+                              activeBusinessId == business.id
+                                ? 'max-w-[calc(100%-28px)]'
+                                : 'w-full'
+                            "
+                          >
+                            <span
+                              [class]="
+                                business.isOwner
+                                  ? 'tdsi-flag-fill'
+                                  : 'tdsi-shop-fill'
+                              "
+                              class="tds-icon-size-m tds-color-icon-tertiary mr-2"
+                            ></span>
+                            <span
+                              class="font-semibold max-w-[calc(100%-28px)] truncate"
+                            >
+                              {{ business.name }}
+                            </span>
+                          </div>
+                          <div
+                            *ngIf="activeBusinessId == business.id"
+                            class="tdsi-success-fill tds-icon-size-m tds-color-icon-brand-primary ml-2"
+                          ></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </tds-card>
+
+            <!-- Section 2 -->
+            <tds-card class="flex-1 min-w-0 h-full"> Section 2 </tds-card>
+          </div>
+        </div>
+      </tds-spin>
+    </ng-container>
+  </ng-container>
+</div>

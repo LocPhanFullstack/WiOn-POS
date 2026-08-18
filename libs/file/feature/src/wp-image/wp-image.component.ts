@@ -48,7 +48,6 @@ import { TDSMapperPipeModule } from 'tds-ui/cdk/pipes/mapper';
       deps: [WIMfConfigService],
     },
   ],
-  styleUrls: ['./wp-image.component.scss'],
   templateUrl: './wp-image.component.html',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,

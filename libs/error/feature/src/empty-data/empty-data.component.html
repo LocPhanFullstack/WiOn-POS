@@ -1,0 +1,10 @@
+<div
+  class="w-full flex flex-col items-center justify-center tds-color-text-primary tds-body-2"
+>
+  <tds-illustration
+    [tdsName]="iconName"
+    [ngStyle]="{ 'width.px': iconWidth, 'height.px': iconHeight }"
+  ></tds-illustration>
+  <div *ngIf="!!title" [class]="titleClass">{{ title }}</div>
+  <div *ngIf="!!content" [class]="contentClass">{{ content }}</div>
+</div>

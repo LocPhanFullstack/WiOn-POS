@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import { HttpClient, HttpContext } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { Inject,inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -59,7 +59,7 @@ import { SendSmsOtpResultDto } from '../models/send-sms-otp-result-dto';
 import { UserProfileDto } from '../models/user-profile-dto';
 import { VerifyOtpResultDto } from '../models/verify-otp-result-dto';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class AccountService extends FNBAccountBaseService {
   override config: FNBAccountApiConfiguration = inject(FNBAccountApiConfigurationToken);
   override http: HttpClient = inject(HttpClient);

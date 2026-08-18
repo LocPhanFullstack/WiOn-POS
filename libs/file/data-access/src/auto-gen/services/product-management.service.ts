@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import { HttpClient, HttpContext } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { Inject,inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -25,7 +25,7 @@ import { ProductVideoDefaultUploadResultDto } from '../models/product-video-defa
 import { ProductVideoUploadResultDto } from '../models/product-video-upload-result-dto';
 import { SuggestProductNameResultDto } from '../models/suggest-product-name-result-dto';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class ProductManagementService extends FNBFileBaseService {
   override config: FNBFileApiConfiguration = inject(FNBFileApiConfigurationToken);
   override http: HttpClient = inject(HttpClient);

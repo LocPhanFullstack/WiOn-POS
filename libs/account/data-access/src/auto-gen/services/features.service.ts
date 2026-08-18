@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import { HttpClient, HttpContext } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { Inject,inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -15,7 +15,7 @@ import { featuresUpdate } from '../fn/features/features-update';
 import { FeaturesUpdate$Params } from '../fn/features/features-update';
 import { GetFeatureListResultDto } from '../models/get-feature-list-result-dto';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class FeaturesService extends FNBAccountBaseService {
   override config: FNBAccountApiConfiguration = inject(FNBAccountApiConfigurationToken);
   override http: HttpClient = inject(HttpClient);

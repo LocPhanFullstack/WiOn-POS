@@ -1,4 +1,5 @@
 {
-    "account": "apps/account",
-    "dashboard": "apps/dashboard"
+  "account": "apps/account",
+  "dashboard": "apps/dashboard",
+  "shop": "apps/shop"
 }

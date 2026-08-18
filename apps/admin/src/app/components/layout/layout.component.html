@@ -162,18 +162,18 @@
                 </tds-dropdown-menu>
               </div>
             </tds-header>
-
-            <tds-layout-content
-              class="overflow-auto tds-color-surface-sunken-light dark:tds-color-surface-sunken-dark relative"
-            >
-              <div
-                class="absolute inset-0 overflow-y-auto overflow-x-visible tds-custom-scroll"
-                cdkScrollable
-              >
-                <router-outlet></router-outlet>
-              </div>
-            </tds-layout-content>
           </tds-layout-header>
+
+          <tds-layout-content
+            class="overflow-auto tds-color-surface-sunken-light dark:tds-color-surface-sunken-dark relative"
+          >
+            <div
+              class="absolute inset-0 overflow-y-auto overflow-x-visible tds-custom-scroll"
+              cdkScrollable
+            >
+              <router-outlet #o="outlet"></router-outlet>
+            </div>
+          </tds-layout-content>
         </tds-layout>
       </tds-layout>
     </ng-container>

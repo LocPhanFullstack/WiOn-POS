@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import { HttpClient, HttpContext } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { Inject,inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -27,7 +27,7 @@ import { FnbShopInvitationSendInvitation$Params } from '../fn/fnb-shop-invitatio
 import { InvitationUrlDto } from '../models/invitation-url-dto';
 import { InviteCreateResponseDto } from '../models/invite-create-response-dto';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class FnbShopInvitationService extends FNBAccountBaseService {
   override config: FNBAccountApiConfiguration = inject(FNBAccountApiConfigurationToken);
   override http: HttpClient = inject(HttpClient);

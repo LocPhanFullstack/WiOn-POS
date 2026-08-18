@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import { HttpClient, HttpContext } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { Inject,inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -20,7 +20,7 @@ import { mediaGetVideo } from '../fn/media/media-get-video';
 import { MediaGetVideo$Params } from '../fn/media/media-get-video';
 import { MediaPagedAndFilteredResultDto } from '../models/media-paged-and-filtered-result-dto';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class MediaService extends FNBFileBaseService {
   override config: FNBFileApiConfiguration = inject(FNBFileApiConfigurationToken);
   override http: HttpClient = inject(HttpClient);

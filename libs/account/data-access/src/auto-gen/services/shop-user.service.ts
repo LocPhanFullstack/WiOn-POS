@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import { HttpClient, HttpContext } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { Inject,inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -40,7 +40,7 @@ import { ShopUserUnlockUser$Params } from '../fn/shop-user/shop-user-unlock-user
 import { shopUserUpdateShopUserById } from '../fn/shop-user/shop-user-update-shop-user-by-id';
 import { ShopUserUpdateShopUserById$Params } from '../fn/shop-user/shop-user-update-shop-user-by-id';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class ShopUserService extends FNBAccountBaseService {
   override config: FNBAccountApiConfiguration = inject(FNBAccountApiConfigurationToken);
   override http: HttpClient = inject(HttpClient);

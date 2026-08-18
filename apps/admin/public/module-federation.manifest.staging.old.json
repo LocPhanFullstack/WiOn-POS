@@ -1,4 +1,5 @@
 {
   "account": "http://localhost:4201",
-  "dashboard": "http://localhost:4202"
+  "dashboard": "http://localhost:4202",
+  "shop": "http://localhost:4203"
 }
